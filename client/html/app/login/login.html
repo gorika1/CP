@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{HEAD}
+		<script type="text/javascript">
+			$(document).on( 'ready', function(){
+				$('ul li:nth-child(4)').addClass('active');
+			});
+		</script>
+	</head>
+
+	<body>
+
+		{USER BAR}
+		<div class="container">
+
+			{HEADER}
+
+			<div class="row">
+				<div class="col-md-6">
+					<form method="post">
+						<span>Crearse una cuenta en Conocimiento Plus</span>
+						<br />
+						<label for="registro-nombre">Nombre: </label> <br />
+						<input type="text" id="registro-nombre" name="registro-nombre" placeholder="Juan Ramirez" required /> <br />
+						<label for="registro-correo">Correo: </label> <br />
+						<input type="email" id="registro-correo" name="registro-correo" placeholder="example@example.com" required /> <br />
+						<label for="registro-pass">Contraseña: </label> <br />
+						<input type="password" id="registro-pass" name="registro-pass" placeholder="*********" required /> <br />
+						<input type="submit" value="Registrarse" />
+
+						<input type="hidden" name="registro" value="si" />
+					</form>
+				</div>
+				<div class="col-md-6">
+					<span>O bien, puedes identificarse</span>
+					<form action="" method="post">
+						<label>
+							Correo: <br />
+							<input type="email" name="correo" placeholder="example@example.com" required />
+						</label>
+						<br />
+						<label> 
+							Contraseña: <br />
+							<input type="password" name="pass" placeholder="*********" required />
+						</label> <br />
+						<input type="submit" value="Acceder" />
+					</form>
+				</div>				
+			</div>
+
+		</div>
+
+		<br /> <br />
+		<div class="container">
+			{FOOTER}
+		</div>
+		
+	</body>
+</html>

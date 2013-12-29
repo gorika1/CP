@@ -1,0 +1,83 @@
+<div id="user-bar">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" lhref="">Conocimiento Plus</a>
+			</div>
+			<div class="navbar-collapse collapse">
+
+				<!--Navbar para pantallas sm y xs-->
+				<div class="panel-group visible-sm visible-xs" id="accordion">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4 class="panel-title" class="lg-sm-center">
+								<a id="according" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+				  					Menú <span id="according-change" class="glyphicon glyphicon-chevron-down"></span>
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse">
+							<div class="panel-body">
+								<ul class="nav navbar-nav">
+									<li>
+										<a lhref="">Cursos</a>
+									</li>
+									<li>
+										<a lhref="instituciones/">Instituciones</a>
+									</li>
+									<li>
+										<a lhref="blog/">Blog</a>
+									</li>
+									<li>
+										<a lhref="login/">Registro</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Fin Navbar para pantallas sm y xs-->
+
+				<!--Navbar para pantallas md y lg-->
+				<ul class="nav navbar-nav visible-lg visible-md">
+					<li>
+						<a lhref="">Cursos</a>
+					</li>
+					<li>
+						<a lhref="instituciones/">Instituciones</a>
+					</li>
+					<li>
+						<a lhref="blog/">Blog</a>
+					</li>
+					<li>
+						<a lhref="login/">Registro</a>
+					</li>
+				</ul>
+				<!--Fin Navbar para pantallas lg y md-->
+
+				{[Lx]}{Identidad Usuario}
+			</div><!--Fin navbar-collapse -->
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$(document).on('ready', function(){
+		$('#according').on('click', function(){
+			if( $('#according-change').hasClass('glyphicon-chevron-down') ) {
+				$('#according-change').addClass('glyphicon-chevron-up');
+				$('#according-change').removeClass('glyphicon-chevron-down');
+			} else {
+				$('#according-change').removeClass('glyphicon-chevron-up');
+				$('#according-change').addClass('glyphicon-chevron-down');
+			}
+		});
+	});
+</script>

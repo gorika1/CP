@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		{HEAD}
+		<script type="text/javascript">
+			$(document).on( 'ready', function(){
+				$('ul li:nth-child(1)').addClass('active');
+			});
+		</script>
+	</head>
+	<body>
+
+		{USER BAR}
+		
+		<div class="container">
+
+			{HEADER}
+
+			<section id="cursos">
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title text-center"><strong>Buscar</strong></h3>
+							</div>
+
+							<div class="panel-body">
+								<form name="search">
+									<input type="text" class="form-control" /> <br />									
+									<div class="center">
+										<input type="button" class="btn btn-default btn-md" value="Buscar" />
+									</div>
+									
+								</form>
+							</div>
+						</div>
+
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h3 class="panel-title text-center"><strong>Temáticas</strong></h3>
+								</div>
+								<!-- List group -->
+									<ul class="list-group">
+									{Tematicas}
+								</ul>								
+							</div>
+						</aside>
+					</div>
+
+					<div class="col-lg-9">
+						{Cursos}
+					<div>
+				</div>				
+			</section>
+
+		</div>
+		
+		<br /> <br />
+		<div class="container">
+			{FOOTER}
+		</div>		
+
+	</body>
+</html>

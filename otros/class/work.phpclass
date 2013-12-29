@@ -1,0 +1,333 @@
+<?php
+	
+	//Creado por Valentin Sánchez
+	//21/07/2013
+	//22:03 Geany 1.22
+	
+	require_once 'connecting.phpclass';
+	
+	class Work
+	{
+		static $registers;
+		static $mysqli = null;
+		
+				
+		static function checkMysqli()
+		{
+			//si no hay una conexion mysqli, lo crea
+			if ( !isset( Work::$mysqli ) )
+				Work::$mysqli = Connecting::startConnection();				
+		}//end checkMysqli
+
+		static function freeResult( $result )
+		{
+			if( is_object( $result ) )
+				$result->free();
+			else
+				return;
+		}//end freeResult
+
+
+//*****************************************************************
+
+		
+		static function getRegisters( $from, $campos = '*', $where= null, $order = null, $limit = null )
+		{
+			Work::checkMysqli();
+			
+			$query = 'SELECT '.$campos.' FROM '.$from;
+			
+			if( isset( $where ) )
+				$query = $query.' WHERE '.$where;
+				
+			if( isset( $order ) ) 
+				$query = $query.' ORDER BY '.$order;
+				
+			if( isset( $limit ) )
+				$query = $query.' LIMIT '.$limit;
+			
+			if( ( $result = Work::getCountRegisters( $from, $campos, $where ) ) == 1 )//si solo hay un registro
+			{
+				$result = Work::$mysqli->query( $query );
+				$register = $result->fetch_assoc();
+				return $register;//retorna un array asociativo de una dimension
+			}//end if
+				
+			if( $result = Work::$mysqli->query( $query ) )//si hay mas de un registro
+			{
+				Work::$registers = array();//establece que register es un array
+				while( $register = $result->fetch_assoc() )
+				{
+					Work::$registers[] = $register;//en cada iteracion guarda una fila de datos en el array
+				}//end while
+			}//end if
+			else
+				Work::$registers = false;
+			
+			Work::freeResult( $result );//se libera memoria
+			
+			return Work::$registers;//retorna un array asociativo bidimensional
+			
+		}//end getRegisters
+
+
+//*****************************************************************
+
+//Recibe dos arrays con dos datos: 0 => nombreTabla, 1=> columnaAComparar, retorna los registros de $table1 despues del resultado de la comparacion
+
+/*			
+
+SELECT * FROM 
+comentarios as c
+JOIN
+articulos as a
+WHERE
+c.id_articulo = a.id_articulo
+AND
+a.id_articulo = 1
+
+*/
+
+		static function getRegistersByJoin( $table1, $table2, $value, $campos = '*', $order = null, $limit = null )
+		{
+			if( sizeof( $table1 ) == 2  and sizeof( $table2 ) == 2 )//si los dos array possen dos datos
+			{
+				Work::checkMysqli();
+				
+				$query = 'SELECT '.$campos.' FROM '.$table1[ 0 ].
+						' AS a JOIN '.$table2[ 0 ].' AS b '.
+						' WHERE a.'.$table1[ 1 ].' = b.'.$table2[ 1 ].
+						' AND b.'.$table2[ 1 ].' = '.$value;
+				
+				if( isset( $order ) ) 
+					$query = $query.' ORDER BY '.$order;
+					
+				if( isset( $limit ) )
+					$query = $query.' LIMIT '.$limit;
+					
+				if( ( $result = Work::getCountRegisters( $from, $campos, $where ) ) == 1 )
+				{
+					$result = Work::$mysqli->query( $query );
+					$register = $result->fetch_assoc();
+					$result->free();
+					return $register;
+				}//end if
+
+				
+				if( $result = Work::$mysqli->query( $query ) )
+				{
+					Work::$registers = array();
+					while( $register = $result->fetch_assoc() )
+					{
+						Work::$registers[] = $register;
+					}//end while
+				}//end if
+				else
+					Work::$registers = false;
+			}
+			else
+				Work::$registers = false;		
+			
+			if( isset( $result ) )
+				Work::freeResult( $result );
+			
+			return Work::$registers;
+			
+		}//end getRegisters
+
+		
+//*****************************************************************
+		
+		
+		static function setRegister( $table, $campos, $values )
+		{
+			Work::checkMysqli();
+			
+			$query = "INSERT INTO ".$table;
+			
+			if( $campos != '*' )
+				$query = $query."( ".$campos." )";
+				
+			$query = $query." values( ".$values." ) ";
+			
+			$query = strip_tags( $query );
+			
+			if( Work::$mysqli->query( $query ) )
+				$bool = true;				
+			else
+				$bool = false;
+				
+			return $bool;
+		}//end setRegister
+		
+		
+//*****************************************************************
+
+
+		static function updateRegister( $table, $set, $where = null )
+		{
+			if( !isset( $where ) )
+			{
+				echo "<script>
+					alert( 'Si no pasa un sentencia where, no se podra ejecutar el update' );
+				</script>";
+				
+				$bool = false;
+			}//end if
+			else
+			{
+				Work::checkMysqli();
+				
+				$query = "UPDATE ".$table.
+				" SET ".$set." WHERE ".$where;
+				
+				if( Work::$mysqli->query( $query ) )
+					$bool = true;
+				else
+					$bool = false;
+			}//end else
+			
+			return $bool;
+			
+		}//end updateRegister
+		
+		
+//*****************************************************************
+
+
+		static function deleteRegister( $table, $where = null ) 
+		{
+			if( !isset( $where ) )
+			{
+				echo "<script>
+					alert( 'Si no pasa un sentencia where, no se puedo realizar la accion' );
+				</script>";
+				
+				$bool = false;
+			}//end if
+			else
+			{
+				Work::checkMysqli();
+				
+				$query = "DELETE FROM ".$table.
+				" WHERE ".$where;
+				
+				if( Work::$mysqli->query( $query ) )
+					$bool = true;
+				else
+					$bool = false;
+			}//end else
+			
+			return $bool;
+		}//end deleteRegister
+		
+		
+//*******************************************************
+
+
+		static function getCountRegisters( $from, $campos = '*', $where = null )
+		{
+			Work::checkMysqli();
+			
+			$query = "SELECT COUNT( ".$campos." ) FROM ".$from;
+			
+			if( isset( $where ) )
+				$query = $query." WHERE ".$where;
+			
+			if( $result = Work::$mysqli->query( $query ) )		
+			{
+				$count = $result->fetch_array();				
+				$count = $count[ 0 ];
+			}//end if
+			else
+				$count = false;
+			
+			Work::freeResult( $result );
+
+			return $count;
+			
+		}//end getCountRegisters
+
+
+//*******************************************************
+	
+		static function getPaginacion( $inicio, $categoria ) 
+		{
+			Work::checkMysqli();
+						
+			$query = "SELECT count( * ) FROM noticias
+						WHERE
+						id_categoria = $categoria
+						ORDER BY id_noticia ASC";
+						
+			$result = Work::$mysqli->query( $query );			
+						
+			$query = "SELECT * FROM noticias
+						WHERE
+						id_categoria = $categoria
+						ORDER BY id_noticia ASC
+						LIMIT $inicio , 10";
+
+			if( $result = Work::$mysqli->query( $query ) )
+			{
+				Work::$registers = array();
+				while( $register = $result->fetch_assoc() )
+				{
+					Work::$registers[] = $register;
+				}
+				
+				return Work::$registers;	
+			}
+		}//end getPaginacion
+		
+		
+//**************************************************************
+
+
+		static function shortenText( $text, $count ) 
+		{
+			$subText = substr( $text, 0, $count );
+			return $subText;
+		}//end shortenText
+
+
+//***************************************************************
+
+
+		static function numberEncripting( $pass )
+		{
+			echo "<script src='js/md5.js'></script>
+			<script src='js/utf8_encode.js'></script>
+			<script>
+				var pass = md5(".$pass.");
+			</script>";
+			
+			$pass = "<script> document.write(pass) </script>";
+				
+			$passE = md5( $pass );
+			
+			return $passE;
+			
+		}//end encripting
+
+
+//*****************************************************************
+
+
+		static function dateReverse( $date, $separate )
+		{
+			$dia = substr( $fecha, 7, 2 );
+			$mes = substr( $fecha, 5, 2 );
+			$anio = substr( $fecha, 0, 4 );
+
+			$date = $dia.$separate.$mes.$separate.$anio
+
+			return $date;
+		}//end dateReverse
+
+	}//end Work
+
+
+//*****************************************************************
+
+?>

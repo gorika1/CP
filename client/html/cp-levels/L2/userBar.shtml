@@ -1,0 +1,2 @@
+<span>{Nombre Usuario}</span>		
+<img id="user-icon" lsrc="media/images/usuarios/{Imagen Usuario}" />

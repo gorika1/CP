@@ -1,0 +1,156 @@
+body {
+	background: url(../images/fondo.jpg);
+}
+
+body > .container {
+	background: #FFF;
+	-webkit-border-radius: .7em;
+	-moz-border-radius: .7em;
+	border-radius: .7em;
+	margin-top: -1em;
+	padding-top: 1em;
+}
+
+footer div {
+	font-family: Helvetica;
+	font-size: 11px;
+	line-height: 11px;
+	margin: auto;
+	max-width: 200px;
+	padding: 1em;
+	text-align: center;
+}
+
+footer div a {
+	font-weight: bold;
+}
+
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+img.center {
+	display: block;
+}
+
+@media( max-width:992px ) {
+	.lg-sm-center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+}
+
+@media( max-width:768px ) {
+	.lg-xs-center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+}
+
+
+
+.curso-img {
+	width: 90%;
+	max-height: 400px;
+}
+
+
+/**** INSTITUCIONES **/
+.image-institucion {
+	width: 250px;
+	height: 200px !important;
+}
+
+
+/************************* USER BAR ********************************/
+#user-bar .panel {
+	background-color: rgb(34, 34, 34);
+}
+
+#user-bar .panel-primary {
+	border-color: #CCC !important;
+}
+
+#user-bar .panel-primary .panel-heading {
+	color: #ffffff;
+  	background-color: rgb(34, 34, 34);
+  	border-color: #CCC;
+}
+
+#user-bar .panel-primary .panel-heading .glyphicon {
+	font-size: 12px;
+}
+
+#user-bar .panel-primary .panel-heading a,
+#user-bar .panel-primary .panel-heading a:hover,
+#user-bar .panel-primary .panel-heading a:active,
+#user-bar .panel-primary .panel-heading a:focus {
+	color: #FFF;
+	display: block;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+}
+
+#user-bar .panel-primary .panel-body {
+	border-color: #CCC;
+}
+
+
+
+/*********************** FICHA CURSO **********************************/
+@media (min-width: 1200px) {
+	#curso-modulos, 
+	#curso-video {
+		margin-left: 3.333333333333332%;
+	}
+}
+
+.item-modulos {
+	margin-bottom: .8em;
+}
+
+.item-modulos img {
+	max-width: 80px;
+}
+
+.item-modulos .modulo-titulo {
+	font-weight: bold;
+	margin-left: .8em;
+}
+
+.item-tutores,
+.item-instituciones {
+	text-align: center;
+}
+
+.tutor-img,
+.institucion-img {
+	margin-left: 3px;
+	width: 31%;
+}
+
+.tutor-img:first,
+.institucion-img:first {
+	margin: 0;
+}
+
+.information-panels .panel-heading {
+	font-weight: bold;
+	text-align: center;	
+}
+
+#curso-video *,
+#curso-video iframe {
+	min-height: 250px;
+	max-height: 400px;
+	width: 100%;
+}

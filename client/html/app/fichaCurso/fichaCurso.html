@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		{HEAD}
+	</head>
+	<body>
+
+		{USER BAR}
+		
+		<div class="container">
+			
+			{HEADER}
+			
+
+			<div class="row">
+				<div class="col-lg-5 col-lg-offset-1" id="curso-video">
+					{Video Presentacion}			
+				</div>
+
+				<div class="col-lg-6">
+					<p>
+						{Descripcion Curso}
+					</p>
+
+					<div id="curso-inscripcion">
+						{[Lx]}{Curso Inscripcion}
+					</div> 
+					
+				</div>		
+			</div>
+
+			<br/><br />
+
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-1" id="curso-modulos">
+					{Modulos}
+				</div>
+
+				<div class="col-lg-3 information-panels">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Conocimientos Previos Necesarios</div>
+						<div class="panel-body">
+							{Conocimientos Necesarios}
+						</div>
+					</div>
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">Fecha de Inicio</div>
+						<div class="panel-body text-center">
+							{Fecha Inicio}
+						</div>
+					</div>
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">Plantel de Tutores</div>
+						<div class="panel-body">
+							<div class="item-tutores">
+								{Tutores}
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-primary">
+						<div class="panel-heading">Institucion(es)</div>
+						<div class="panel-body">
+							<div class="item-instituciones">
+								{Instituciones}
+							</div>							
+						</div>
+					</div>
+				</div>			
+			</div>			
+		</div>
+		<br/><br />
+		<div class="container">
+			{FOOTER}
+		</div>
+		
+
+		<script type="text/javascript">
+			$(document).on( 'ready', function(){
+				$('ul li:nth-child(1)').addClass('active');
+			});
+		</script>
+	</body>
+</html>

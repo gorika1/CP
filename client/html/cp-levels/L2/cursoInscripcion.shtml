@@ -1,0 +1,4 @@
+<form id="curso-inscripcion" method="post">
+	<input type="hidden" name="inscribirse" value="si" />							
+	<input type="submit" class="btn" value="Inscribirse" />
+</form>

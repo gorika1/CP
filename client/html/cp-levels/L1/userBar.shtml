@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav navbar-right">
+	<li>
+		<a lhref="user/mi-perfil">
+			<button type="button" class="btn btn-default btn-xs">
+	  			<span class="glyphicon glyphicon-user"></span> {Nombre Usuario}
+			</button>		
+		</a>
+	</li>
+</ul>

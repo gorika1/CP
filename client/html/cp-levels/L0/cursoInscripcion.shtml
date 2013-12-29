@@ -1,0 +1,4 @@
+<div class="handler-title">
+	Debe iniciar sesión para inscribirse al curso
+</div>
+<a lhref="login" class="btn">Iniciar Sesión</a>

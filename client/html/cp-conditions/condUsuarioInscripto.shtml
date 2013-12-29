@@ -1,0 +1,13 @@
+<form name="form" id="curso-inscripcion" method="post">
+	<input type="hidden" name="inscribirse" value="no" />							
+	<input type="button" onclick="confirmar()" class="btn" value="Desinscribirse" />
+</form>
+<script type="text/javascript">
+	
+	function confirmar() {
+		if( confirm( '¿Realmente quieres abandonar este curso?' ) ) {
+			document.form.submit();
+		}
+	}
+
+</script>
